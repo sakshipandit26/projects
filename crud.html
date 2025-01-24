@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+initial-scale=1.0">
+    <title>CRUD Operation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(120deg, #74ebd5, #ACB6E5);
+        }
+
+        .div1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .form-div1 {
+            background-color: #799cbf;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            width: 50%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input {
+            margin-bottom: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #btn {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #btn input {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #hed {
+            text-align: center;
+            text-decoration: underline;
+            font-size: 50px;
+            font-family: cursive;
+            color: #2472e8;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #e3e3e3;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .action-buttons button {
+            margin: 0 5px;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #4cb14f;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="hed">CRUD Operation</h1>
+    <div class="div1">
+        <div class="form-div1">
+            <form id="productform">
+                <label for="productcode">Product Code</label>
+                <input type="text" id="productcode" placeholder="Enter
+product code">
+                <label for="productname">Product Name</label>
+                <input type="text" id="productname" placeholder="Enter
+the product name">
+                <label for="Qty">Qty</label>
+                <input type="text" id="Qty" placeholder="Enter
+Quantity">
+                <label for="price">Price</label>
+                <input type="text" id="price" placeholder="Enter price">
+                <div id="btn">
+                    <input type="button" onclick="crud()" value="Submit">
+                    <input type="reset" value="Reset">
+                </div>
+            </form>
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const productform = document.getElementById("productform");
+        const producttable =
+            document.getElementById("product-table").getElementsByTagName('tbody')[0];
+        let currentedit = null;
+
+        function crud() {
+            const productcode =
+                document.getElementById("productcode").value;
+            const productname =
+                document.getElementById("productname").value;
+            const Qty = document.getElementById("Qty").value;
+            const price = document.getElementById("price").value;
+
+            if (!productcode || !productname || !Qty || !price) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            if (currentedit) {
+                updaterow(currentedit, productcode, productname, Qty,
+                    price);
+                currentedit = null;
+            } else {
+                addrow(productcode, productname, Qty, price);
+            }
+            productform.reset();
+        }
+
+        function addrow(code, name, Qty, price) {
+            const newRow = producttable.insertRow();
+            newRow.innerHTML = `
+                 <td>${code}</td>
+                 <td>${name}</td>
+                 <td>${Qty}</td>
+                 <td>${price}</td>
+                 <td class="action-buttons">
+                     <button class="edit-btn"
+onclick="onEdit(this)">Edit</button>
+                     <button class="delete-btn"
+onclick="deleteRow(this)">Delete</button>
+                 </td>
+             `;
+        }
+
+        function onEdit(button) {
+            const row = button.parentElement.parentElement;
+            currentedit = row;
+            document.getElementById("productcode").value =
+                row.cells[0].innerText;
+            document.getElementById("productname").value =
+                row.cells[1].innerText;
+            document.getElementById("Qty").value =
+                row.cells[2].innerText;
+            document.getElementById("price").value =
+                row.cells[3].innerText;
+        }
+
+        function updaterow(row, code, name, Qty, price) {
+            row.cells[0].innerText = code;
+            row.cells[1].innerText = name;
+            row.cells[2].innerText = Qty;
+            row.cells[3].innerText = price;
+        }
+
+        function deleteRow(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+    </script>
+</body>
+
+</html>
