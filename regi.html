@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="./login.css">
+    <script>
+        function validateField(field, pattern, errorMsg, errorSpanId) {
+            const value = field.value;
+            const errorSpan = document.getElementById(errorSpanId);
+
+            if (value.match(pattern)) {
+                field.style.borderColor = "green";
+                errorSpan.innerHTML = "";
+                return true;
+            } else {
+                field.style.borderColor = "red";
+                errorSpan.innerHTML = errorMsg;
+                return false;
+            }
+        }
+
+        function bfunU() {
+            const pattern = /^([A-Z]{1,1})+([a-z]{3,7})$/;
+            const errorMsg = "Username must start with an uppercase letter followed by 3-7 lowercase letters.";
+            validateField(f1.uname, pattern, errorMsg, "sp");
+        }
+
+        function bfunP() {
+            const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*])[A-Za-z\d@#$%&*]{8,}$/;
+            const errorMsg = `<h3 style='color:black'>PASSWORD MUST CONTAIN: </h3> 
+                <ul><li>At least one lowercase letter</li>
+                    <li>At least one uppercase letter</li>
+                    <li>At least one number</li>
+                    <li>At least one special symbol</li>
+                    <li>Minimum 8 Characters</li></ul>`;
+            validateField(f1.pass, pattern, errorMsg, "sp1");
+        }
+
+        function bfunC() {
+            const password = f1.pass.value;
+            const cpass = f1.cpass.value;
+            const errorSpan = document.getElementById("sp2");
+
+            if (cpass === password) {
+                f1.cpass.style.borderColor = "green";
+                errorSpan.innerHTML = "";
+            } else {
+                f1.cpass.style.borderColor = "red";
+                errorSpan.innerHTML = "Passwords do not match.";
+            }
+        }
+
+        function validateEmail() {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const errorMsg = "Please enter a valid email address.";
+            validateField(f1.email, pattern, errorMsg, "spEmail");
+        }
+
+        function validateMobile() {
+            const pattern = /^\d{10}$/;
+            const errorMsg = "Mobile number must be 10 digits.";
+            validateField(f1.mobile, pattern, errorMsg, "spMobile");
+        }
+
+        function validateDOB() {
+            const dob = f1.dob.value;
+            const errorSpan = document.getElementById("spDOB");
+
+            if (dob) {
+                f1.dob.style.borderColor = "green";
+                errorSpan.innerHTML = "";
+            } else {
+                f1.dob.style.borderColor = "red";
+                errorSpan.innerHTML = "Date of Birth is required.";
+            }
+        }
+
+        function submitFun1() {
+            let valid = true;
+
+            valid &= validateField(f1.uname, /^([A-Z]{1,1})+([a-z]{3,7})$/, "Username is invalid.", "sp");
+            valid &= validateField(f1.pass, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*])[A-Za-z\d@#$%&*]{8,}$/, "Password is invalid.", "sp1");
+            valid &= f1.cpass.value === f1.pass.value;
+            valid &= validateField(f1.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email is invalid.", "spEmail");
+            valid &= validateField(f1.mobile, /^\d{10}$/, "Mobile number is invalid.", "spMobile");
+
+            if (valid) {
+                alert("Register successfully");
+                return true;
+            }
+
+            alert("Please correct the highlighted fields.");
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+        <h1>Registration Form</h1>
+        <form action="loginpage.html" name="f1" onsubmit="return submitFun1()">
+            <table>
+                <tr>
+                    <td>
+                        Full Name: <br>
+                        <input type="text" name="uname" onblur="bfunU()">
+                        <br>
+                        <span id="sp" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email ID: <br>
+                        <input type="email" name="email" onblur="validateEmail()">
+                        <br>
+                        <span id="spEmail" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender: <br>
+                        <input type="radio" name="gender" value="Male"> Male
+                        <input type="radio" name="gender" value="Female"> Female
+                        <input type="radio" name="gender" value="Other"> Other
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password: <br>
+                        <input type="password" name="pass" onblur="bfunP()">
+                        <br>
+                        <span id="sp1" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Confirm Password: <br>
+                        <input type="password" name="cpass" onblur="bfunC()">
+                        <br>
+                        <span id="sp2" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Mobile Number: <br>
+                        <input type="text" name="mobile" onblur="validateMobile()">
+                        <br>
+                        <span id="spMobile" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Date of Birth: <br>
+                        <input type="date" name="dob" onblur="validateDOB()">
+                        <br>
+                        <span id="spDOB" style="color:red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select City: <br>
+                        <select name="city">
+                            <option value="">Select</option>
+                            <option value="City1">City1</option>
+                            <option value="City2">City2</option>
+                            <option value="City3">City3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Register">
+                        <input type="reset" value="Reset">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./register.css">
+    <script src="./register.js"></script>
+</head>
+
+<body>
+
+    <center>
+        <h1>Registation Form</h1>
+        <form action="loginpage.html" name="f1" onsubmit="return submitFun1()">
+            <table>
+                <tr>
+                    <td>
+                        User Name: <br>
+                        <input type="text" name="uname" id="" onblur="bfunU()">
+                        <br>
+                        <span id="sp" style="color:red"></span>
+                    </td>
+                    <td id="err"></td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Email ID: <br>
+                        <input type="text" name="email" onblur="Emailfun()">
+                        <br>
+                        <span id="spemail" style="color:red"></span>
+                    </td>
+                    <td id="erre"></td>
+                </tr>
+                <tr>
+
+                <tr>
+                    <td>
+                        Gender: <br>
+                        <br>
+                        <input type="radio" name="gender" value="Male" required> Male
+                        <input type="radio" name="gender" value="Female" required> Female
+                        <input type="radio" name="gender" value="Other" required> Other
+                    </td>
+                </tr>
+                <td>
+                    Password: <br>
+                    <input type="text" name="pass" id="" onblur="bfunP()">
+                    <br>
+                    <span id="sp1" style="color:red"></span>
+                </td>
+                <td id="err1"></td>
+
+                <tr>
+                    <td>
+
+                        Confirm Password: <br>
+                        <input type="text" name="cpass" id="" onblur="bfunC()">
+                        <br>
+                        <span id="sp2" style="color:red"></span>
+                    </td>
+                    <td id="err2"></td>
+                </tr>
+                </tr>
+
+                <tr>
+                    <td>
+                        Mobile Number: <br>
+                        <input type="text" name="mno" onblur="Mobilefun()">
+                        <br>
+                        <span id="spno" style="color:red"></span>
+                    </td>
+                    <td id="errno"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Date of Birth: <br>
+                        <input type="date" name="dob" onblur="DOBfun()" required>
+                        <br>
+                        <span id="spDOB" style="color:red"></span>
+                    </td>
+                    <td id="errDOB"></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Select City: <br>
+                        <select name="city" class="city" name="city" onblur="cityfun()" required>
+                            <optgroup label="maharashtra" >
+                                <option>--choose city--</option>
+                                <option>satara</option>
+                                <option>Pune</option>
+                                <option>Mumbai</option>
+                                <option>Nashik</option>
+                            </optgroup>
+
+                            <optgroup label="Gujrat">
+                                <option>Ahmedabad</option>
+                                <option>Surat</option>
+                                <option>Baroda</option>
+                                <option>Rajkot</option>
+                            </optgroup>
+
+                            <optgroup label="Karnatka">
+                                <option>bankpura</option>
+                                <option>kolar</option>
+                                <option>haveri</option>
+                                <option>Banglore</option>
+                            </optgroup>
+                        </select>
+
+                        <br>
+                        <span id="spcity" style="color:red"></span>
+                    </td>
+                    <td id="errcity"></td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" name="" id="" value="register">
+                        <input type="reset" value="Reset">
+
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+
+</body>
+
+</html>
